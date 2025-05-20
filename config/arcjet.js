@@ -11,11 +11,12 @@ const aj = arcjet({
       mode: "LIVE", // or "TEST" for testing
       allow: [ "CATEGORY:SEARCH_ENGINE", "POSTMAN"],
     }),
-    tokenBucket({
+       tokenBucket({
       mode: "LIVE",
-      refillRate: 5, // Refill 5 tokens per interval
-      interval: 10, // Refill every 10 seconds
-      capacity: 10, // Bucket capacity of 10 tokens
+      refillRate: 1,     // 5 tokens per interval
+      interval: 10,      // 10-second interval
+      capacity: 2,      // Maximum 10 tokens
+      cost: 1,           // Each request costs 1 token
     }),
   ],
 });

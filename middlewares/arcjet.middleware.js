@@ -1,9 +1,15 @@
+import { request } from "express";
 import aj from "../config/arcjet.js";
 
 const arcjetMiddleware = async (req, res, next) => {
     try {
+        // const decision = await aj.protect(req)
+         // Create a request details object with all necessary information
+         
+           
+
         const decision = await aj.protect(req)
-        // console.log('Arcjet decision:', decision);
+        console.log('Arcjet decision:', decision.results);
 
         if (decision.isDenied()){
             if (decision.reason.isRateLimit()) return res.status(429).json({ error: 'Rate limit exceeded' });
@@ -15,7 +21,6 @@ const arcjetMiddleware = async (req, res, next) => {
         next()
     } catch (error) {
         console.error('Error in arcjetMiddleware:', error);
-        // res.status(500).json({ message: 'Internal server error' });
         next(error)
     }
 };
