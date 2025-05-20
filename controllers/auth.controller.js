@@ -2,7 +2,7 @@ import mongoose from "mongoose"
 import bcrypt from "bcryptjs"
 import user from "../models/user.model.js"
 import jwt from "jsonwebtoken"
-import { JWT_EXPIRES_IN, JWT_SECRET } from "../config/env.js "
+import { JWT_EXPIRES_IN, JWT_SECRET } from "../config/env.js"
 
 
 export const signUp = async (req, res, next) => {
