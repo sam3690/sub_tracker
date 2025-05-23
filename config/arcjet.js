@@ -5,7 +5,6 @@ const aj = arcjet({
   key: ARCJET_KEY,
   characteristics: ["ip.src"], 
   rules: [
-
     shield({ mode: "LIVE" }),
     detectBot({
       mode: "LIVE", // or "TEST" for testing
@@ -13,10 +12,9 @@ const aj = arcjet({
     }),
        tokenBucket({
       mode: "LIVE",
-      refillRate: 1,     // 5 tokens per interval
+      refillRate: 5,     // 5 tokens per interval
       interval: 10,      // 10-second interval
-      capacity: 2,      // Maximum 10 tokens
-      cost: 1,           // Each request costs 1 token
+      capacity: 10,      // Maximum 10 tokens      
     }),
   ],
 });

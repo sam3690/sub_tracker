@@ -56,7 +56,7 @@ const subscriptionSchema = new mongoose.Schema({
         }
     },
     user:{
-        type: mongoose.Schema.Types.ObjectId(),
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
         index: true,
@@ -64,13 +64,13 @@ const subscriptionSchema = new mongoose.Schema({
 
 }, {timestamps: true})
 
-subscriptionSchema.pre('save', function(){
+subscriptionSchema.pre('validate', function(next){
     if(!this.renewalDate){
         const renewalPeriods = {
             daily: 1,
             weekly: 7,
             monthly: 30,
-            yearly: 356
+            yearly: 365,
         }
 
         this.renewalDate = new Date(this.startDate)
@@ -82,5 +82,7 @@ subscriptionSchema.pre('save', function(){
 
     next()
 })
-
+ 
 const Subscription = mongoose.model('Subscription', subscriptionSchema)
+
+export default Subscription;
